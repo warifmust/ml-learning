@@ -60,8 +60,8 @@ model.compile({
 // train/fit our network
 const startTime = Date.now();
 model.fit(trainingData, outputData, { epochs: 100 }).then(history => {
-    console.log(history);
-  //   console.log("DONE", Date.now() - startTime);
+  // console.log(history);
+  console.log("DONE", Date.now() - startTime);
   model.predict(testingData).print();
 });
 // test network
