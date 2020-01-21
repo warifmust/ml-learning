@@ -6,27 +6,25 @@ const irisTesting = require("./iris-testing.json");
 // convert/setup our data
 const trainingData = tf.tensor2d(
   iris.map(item => [
-    item.sepalLength,
-    item.sepalWidth,
-    item.petalLength,
-    item.petalWidth
+    item.sepal_length,
+    item.sepal_width,
+    item.petal_length,
+    item.petal_width
   ])
 );
-
 const outputData = tf.tensor2d(
   iris.map(item => [
-    item === "setosa" ? 1 : 0,
-    item === "versicolor" ? 1 : 0,
-    item === "virginica" ? 1 : 0
+    item.species === "setosa" ? 1 : 0,
+    item.species === "virginica" ? 1 : 0,
+    item.species === "versicolor" ? 1 : 0
   ])
 );
-
 const testingData = tf.tensor2d(
   irisTesting.map(item => [
-    item.sepalLength,
-    item.sepalWidth,
-    item.petalLength,
-    item.petalWidth
+    item.sepal_length,
+    item.sepal_width,
+    item.petal_length,
+    item.petal_width
   ])
 );
 
@@ -60,8 +58,7 @@ model.compile({
 // train/fit our network
 const startTime = Date.now();
 model.fit(trainingData, outputData, { epochs: 100 }).then(history => {
-    console.log(history);
-  //   console.log("DONE", Date.now() - startTime);
+  // console.log(history)
   model.predict(testingData).print();
 });
 // test network
